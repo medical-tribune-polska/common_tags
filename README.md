@@ -50,6 +50,15 @@ Include helpers:
 # app/controllers/application_controller.rb
 helper CommonTags::Engine.helpers
 ```
+Include assets:
+```javascript
+# app/assets/javascripts/application.js
+//= require common_tags/application
+```
+```css
+# app/assets/stylesheets/application.css
+//*= require common_tags/application
+```
 
 ### As master
 Configuration:
@@ -80,7 +89,8 @@ Copy tags from master:
 $ rake common_tags:update_all_tags
 ```
 
-#### If `class Tag` already exists in app:
-rename old `class Tag` and related association
+#### If `tags` association already exists:
+rename association
+
 migrate old tags:
 'migrate_old_tags.rb.example'
