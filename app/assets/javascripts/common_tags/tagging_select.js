@@ -1,4 +1,5 @@
-$.fn.common_tags_select = function(options={}) {
+$.fn.common_tags_select = function(options) {
+  var options = (typeof options !== 'undefined') ? options : { autosubmit: false };
   this.each(function(){
     var url = $(this).data('suggestions-url');
 
