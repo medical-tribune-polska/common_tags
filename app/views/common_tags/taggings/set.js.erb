@@ -1,0 +1,17 @@
+(function() {
+  $message = $('<span><%= flash[:message] %></span>');
+  $newForm = $('<%= j render_modifyable_tags_for(@taggable) %>');
+  $oldForm = $('[data-toggle="common_tags_form"][data-taggable-id="<%= @taggable.id %>"][data-taggable-type="<%= @taggable.class.name %>"]');
+
+  $oldForm.find('[data-toggle="common_tags_select"]').select2('destroy');
+  $oldForm.replaceWith($newForm);
+
+  $newForm.find('[data-toggle="common_tags_select"]')
+          .common_tags_select({ autosubmit: true });
+
+  $newForm.append($message);
+
+  $message.delay(3000).fadeOut(function() {
+    $(this).remove();
+  })
+})();

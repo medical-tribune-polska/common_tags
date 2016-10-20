@@ -1,0 +1,48 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require select2
+ *= require select2-bootstrap
+ *= require_tree .
+ *= require_self
+ */
+
+.taggable-form {
+  display: inline-block;
+}
+
+.select2-container {
+  min-width: 100%;
+}
+
+.taggable-form .select2-container {
+  display: inline-block;
+  min-width: 300px;
+  line-height: 10px;
+}
+
+.taggable-form  .select2-container--bootstrap .select2-selection {
+  font-size: 12px;
+}
+
+.taggable-form  .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
+  margin: 3px 0 0 3px;
+  line-height: 1.5;
+}
+
+.taggable-form  .select2-container--bootstrap .select2-selection--multiple {
+  min-height: 26px;
+}
+
+.taggable-form  .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field {
+  height: 26px;
+}

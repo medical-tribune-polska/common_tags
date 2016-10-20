@@ -1,0 +1,24 @@
+# Add missing old_tags to common_tags
+old_tag_class = Tag
+
+common_tag_names = CommonTags::Tag.all.pluck(:name)
+
+missing_tag_names = old_tag_class.where('lower(name) NOT IN (?)', common_tag_names).pluck(:name)
+
+missing_tag_names.each do |old_tag_name|
+  common_tag = CommonTags::Tag.create name: old_tag_name
+  common_tag.publish_create if common_tag.persisted?
+end
+
+
+
+# Migrate taggings
+Film.connection.execute <<-SQL
+  INSERT INTO common_tags_taggings (tag_id, taggable_id, taggable_type)
+  SELECT common_tags_tags.id AS tag_id,
+         film_id AS taggable_id,
+         'Film' AS taggable_type
+  FROM films_tags
+  JOIN tags ON films_tags.tag_id = tags.id
+  JOIN common_tags_tags ON lower(tags.name) = common_tags_tags.name
+SQL

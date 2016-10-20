@@ -1,0 +1,32 @@
+<%= main_app.root_path %>
+
+<div class="row">
+  <div class="col-sm-8">
+    <table class="table tags-table">
+      <% @tags.each do |tag| %>
+        <tr>
+          <td>
+            <% if tag.specialization %>
+              <span class="glyphicon glyphicon-tag"></span>
+            <% end %>
+          </td>
+          <td>
+            <span class="label label-info"><%= tag.name %></span>
+          </td>
+          <td>
+            <%= tag.connected_tags.map do |tag|
+                "<span class='connected_tag'>#{tag.name}</span>"
+            end.join(',').html_safe %>
+          </td>
+          <td><%= link_to 'Edit', edit_tag_path(tag),
+                          class: 'btn btn-default btn-xs' %></td>
+          <td><%= link_to 'Destroy', tag, method: :delete,
+                          class: 'btn btn-danger btn-xs',
+                          data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <p><%= link_to 'New Tag', new_tag_path, class: 'btn btn-default' %></p>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+INSERT INTO common_tags_tags (name,
+                              specialization,
+                              tag_connections_count,
+                              created_at,
+                              updated_at)
+SELECT *
+FROM dblink(
+  'dbname=vod_backend_development',
+  'SELECT lower(t.name) AS name,
+          t.specialization,
+          t.related_tags_count,
+          t.created_at,
+          t.updated_at
+   FROM tags t')
+AS t1(name text,
+      specialization boolean,
+      related_tags_count integer,
+      created_at timestamp,
+      updated_at timestamp);

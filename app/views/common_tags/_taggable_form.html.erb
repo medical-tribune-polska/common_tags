@@ -1,0 +1,18 @@
+<% taggable_type, taggable_id = taggable.class.name, taggable.id %>
+
+<%= form_tag common_tags.set_taggings_path,
+             method: :patch,
+             remote: true,
+             class: 'taggable-form',
+             data: { toggle: 'common_tags_form',
+                     'taggable-id': taggable_id,
+                     'taggable-type': taggable_type } do %>
+  <%= hidden_field_tag :taggable_type, taggable_type %>
+  <%= hidden_field_tag :taggable_id, taggable_id %>
+  <%= select_tag :tag_ids,
+                 options_from_collection_for_select(taggable.tags, 'id', 'name', taggable.tag_ids),
+                 { multiple: true,
+                   class: 'taggable-form-select',
+                   data: { toggle: 'common_tags_select',
+                           'suggestions-url' => common_tags.suggestions_tags_path } } %>
+<% end %>
