@@ -24,8 +24,11 @@ module CommonTags
       Publisher.publish action: 'destroy', id: id
     end
 
-    def related_tags_for_select
-      Tag.where.not(id: id).order(:name)
+    def to_suggest
+      { id: id,
+        text: name,
+        specialization: specialization?,
+        count: tag_connections_count }
     end
 
     private

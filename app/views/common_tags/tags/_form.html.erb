@@ -28,16 +28,9 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :related_tags %>
+      <%= f.label :connected_tags %>
       <br>
-      <%= f.collection_select :connected_tag_ids,
-                              @tag.related_tags_for_select,
-                              :id,
-                              :name,
-                              { selected: @tag.connected_tag_ids },
-                              { multiple: true,
-                                class: 'form-control',
-                                id: 'common_tags_related_tags' } %>
+      <%= f.connected_tags_field %>
     </div>
 
     <div class="form-group">

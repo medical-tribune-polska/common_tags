@@ -12,5 +12,8 @@
 //
 
 //= require select2
+//= require common_tags/common_tags_select
 
-//= require_tree .
+$(document).on('ready page:change', function(){
+  $('[data-toggle=common_tags_select]').common_tags_select();
+});

@@ -9,10 +9,12 @@
                      'taggable-type': taggable_type } do %>
   <%= hidden_field_tag :taggable_type, taggable_type %>
   <%= hidden_field_tag :taggable_id, taggable_id %>
+  <% hidden_field_tag :taggable_id, taggable_id %>
   <%= select_tag :tag_ids,
-                 options_from_collection_for_select(taggable.tags, 'id', 'name', taggable.tag_ids),
+                 tags_options_for_select(taggable.tags),
                  { multiple: true,
-                   class: 'taggable-form-select',
+                   class: 'form-control',
                    data: { toggle: 'common_tags_select',
-                           'suggestions-url' => common_tags.suggestions_tags_path } } %>
+                           suggestions: common_tags.suggestions_tags_path,
+                           autosubmit: true } } %>
 <% end %>

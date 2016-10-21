@@ -1,7 +1,14 @@
 CommonTags::Engine.routes.draw do
-  resources :tags if CommonTags.draw_routes?
+  tags_resources_actions = if CommonTags.draw_routes?
+    [:index, :edit, :update, :new, :create, :destroy]
+  else
+    []
+  end
 
-  get 'tags/suggestions', as: 'suggestions_tags'
+  resources :tags, only: tags_resources_actions do
+    get 'suggestions', on: :collection
+    get 'related_suggestions'
+  end
 
   resources :taggings, only: [] do
     patch :set, on: :collection
