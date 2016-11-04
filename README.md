@@ -1,9 +1,9 @@
 # CommonTags
-Wspólny system tagów. To jest Rails Engine, który synchronizuję tagi w
-aplikacjach korzystając z rabbitmq. Zażondzać tagami można w "master"
-applikacji. Wszystkie inny dostaną widomość o tym że coś się zmieniło.
+Wspólny system tagów. To jest Rails Engine, który synchronizuje tagi w
+aplikacjach korzystając z rabbitmq. Zażądzać tagami można w "master"
+applikacji. Wszystkie inne dostaną widomość o tym że coś się zmieniło.
 (W sume, można zmieniać tagi w każdej applikacji, tylko trzeba ustawić
-confi.draw_routes, ale mi się wydaję że lepiej mieć to w jednym miejscu).
+config.draw_routes, ale mi się wydaję że lepiej mieć to w jednym miejscu).
 
 ## Usage
 
