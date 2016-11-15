@@ -23,13 +23,18 @@ module CommonTags
       end
 
       def connected_tags_field(method = :connected_tag_ids)
+        suggestions_path = if @object.new_record?
+                             @template.common_tags.suggestions_tags_path
+                           else
+                             @template.common_tags.tag_related_suggestions_path(@object)
+                           end
         html_options = {
           multiple: true,
           class: 'form-control',
           id: "#{@object_name}_#{method}",
           data: {
             toggle: 'common_tags_select',
-            suggestions: @template.common_tags.tag_related_suggestions_path(@object),
+            suggestions: suggestions_path,
           }
         }
         @template.select_tag "#{@object_name}[#{method}]",

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    common_tags (0.1.3)
+    common_tags (0.1.5)
       hutch (< 1.0.0)
       rails (>= 4.2.0)
       select2-rails (>= 4.0.0)
