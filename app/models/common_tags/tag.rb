@@ -5,9 +5,13 @@ module CommonTags
     has_many :taggings, dependent: :destroy
 
     before_validation :downcase_name, if: :name_changed?
+    before_validation :set_default_permalink, if: :permalink_blank?
 
     validates :name, presence: true, allow_blank: false
     validates :name, uniqueness: true
+
+    validates :permalink, presence: true, allow_blank: false
+    validates :permalink, uniqueness: true
 
     scope :specialization, -> { where specialization: true }
 
@@ -39,6 +43,14 @@ module CommonTags
 
       def downcase_name
         self.name = name.downcase
+      end
+
+      def permalink_blank?
+        permalink.blank?
+      end
+
+      def set_default_permalink
+        self.permalink = name.parameterize
       end
   end
 end

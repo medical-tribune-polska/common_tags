@@ -10,6 +10,7 @@ namespace :common_tags do
       INSERT INTO common_tags_tags (id,
                                     name,
                                     specialization,
+                                    permalink,
                                     tag_connections_count,
                                     created_at,
                                     updated_at)
@@ -19,6 +20,7 @@ namespace :common_tags do
         'SELECT ct.id,
                 ct.name,
                 ct.specialization,
+                ct.permalink,
                 ct.tag_connections_count,
                 ct.created_at,
                 ct.updated_at
@@ -26,6 +28,7 @@ namespace :common_tags do
       AS t1(id uuid,
             name text,
             specialization boolean,
+            permalink text,
             tag_connections_count integer,
             created_at timestamp,
             updated_at timestamp);

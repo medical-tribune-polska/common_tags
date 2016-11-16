@@ -1,16 +1,14 @@
 module CommonTags
   class TagsController < ApplicationController
+    before_action :set_tag, only: [:edit, :update, :destroy]
     def index
       @tags = Tag.order('name').all
     end
 
     def edit
-      @tag = Tag.find params[:id]
     end
 
     def update
-      @tag = Tag.find params[:id]
-
       if @tag.update tag_params
         @tag.publish_update tag_params
         redirect_to action: 'index'
@@ -35,7 +33,6 @@ module CommonTags
     end
 
     def destroy
-      @tag = Tag.find params[:id]
       unless @tag.destroy.persisted?
         @tag.publish_destroy
         redirect_to action: 'index'
@@ -57,7 +54,12 @@ module CommonTags
       def tag_params
         params.require(:tag).permit :name,
                                     :specialization,
+                                    :permalink,
                                     connected_tag_ids: []
+      end
+
+      def set_tag
+        @tag = Tag.find params[:id]
       end
   end
 end
