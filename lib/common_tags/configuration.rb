@@ -28,7 +28,7 @@ module CommonTags
   end
 
   class Configuration
-    attr_accessor :draw_routes, :instance_name, :master_db_name, :old_tag_class
+    attr_accessor :draw_routes, :instance_name, :master_db_name, :master_host
 
     def initialize
       @instance_name = "#{::Rails.application.class.parent.name}_common_tags"

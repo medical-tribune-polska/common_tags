@@ -1,9 +1,10 @@
 # Add missing old_tags to common_tags
 old_tag_class = Tag
+old_tag_name_field = 'name'
 
 common_tag_names = CommonTags::Tag.all.pluck(:name)
 
-missing_tag_names = old_tag_class.where('lower(name) NOT IN (?)', common_tag_names).pluck(:name)
+missing_tag_names = old_tag_class.where("lower(#{old_tag_name_field}) NOT IN (?)", common_tag_names).pluck(:name)
 
 missing_tag_names.each do |old_tag_name|
   common_tag = CommonTags::Tag.create name: old_tag_name
