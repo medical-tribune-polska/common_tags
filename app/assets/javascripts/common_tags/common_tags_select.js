@@ -32,8 +32,7 @@
         minimumInputLength: 1,
         templateResult: formatResult,
         templateSelection: formatSelection,
-        theme: 'bootstrap',
-        tags: true
+        theme: 'bootstrap'
       });
 
       if (thisOptions.autosubmit) {
