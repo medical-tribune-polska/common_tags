@@ -5,10 +5,10 @@ module CommonTags
 
     validates :tag_id, uniqueness: { scope: :taggable }
 
-    after_save :add_connected_tags
+    after_save :add_connected_tags, if: :taggable
 
     def add_connected_tags
-      taggable.tags << tag.connected_tags - taggable.tags
+      taggable.tags << (tag.connected_tags - taggable.tags)
     end
   end
 end
