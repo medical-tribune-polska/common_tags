@@ -4,7 +4,6 @@ module CommonTags
     has_many :connected_tags, class_name: Tag, through: :tag_connections
     has_many :taggings, dependent: :destroy
 
-    before_validation :downcase_name, if: :name_changed?
     before_validation :set_default_permalink, if: :permalink_blank?
 
     validates :name, presence: true, allow_blank: false
@@ -39,10 +38,6 @@ module CommonTags
 
       def attributes_with_connected_tag_ids
         attributes.merge connected_tag_ids: connected_tag_ids
-      end
-
-      def downcase_name
-        self.name = name.downcase
       end
 
       def permalink_blank?
