@@ -1,5 +1,7 @@
 <div class="row">
   <div class="col-sm-8">
+    <p><%= link_to 'New Tag', new_tag_path, class: 'btn btn-default' %></p>
+
     <table class="table tags-table">
       <% @tags.each do |tag| %>
         <tr>
