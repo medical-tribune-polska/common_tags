@@ -7,7 +7,7 @@ module CommonTags
     before_validation :set_default_permalink, if: :permalink_blank?
 
     validates :name, presence: true, allow_blank: false
-    validates :name, uniqueness: true
+    validates :name, uniqueness: true, case_sensitive: false
 
     validates :permalink, presence: true, allow_blank: false
     validates :permalink, uniqueness: true
