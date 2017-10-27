@@ -40,13 +40,13 @@ module CommonTags
     end
 
     def suggestions
-      @tags = Tag.where 'name LIKE ?', "%#{params[:q]}%"
+      @tags = Tag.where 'name ILIKE ?', "%#{params[:q]}%"
       render json: @tags.map(&:to_suggest)
     end
 
     def related_suggestions
       @tag = Tag.find params[:tag_id]
-      @tags = Tag.where.not(id: @tag.id).where 'name LIKE ?', "%#{params[:q]}%"
+      @tags = Tag.where.not(id: @tag.id).where 'name ILIKE ?', "%#{params[:q]}%"
       render json: @tags.map(&:to_suggest)
     end
 
