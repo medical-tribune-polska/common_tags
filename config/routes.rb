@@ -11,7 +11,7 @@ CommonTags::Engine.routes.draw do
   end
 
   resources :taggings, only: [] do
-    patch :set, on: :collection
+    put :set, on: :collection
   end
 
   namespace :api do

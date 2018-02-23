@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
-  s.add_dependency 'rails', '>= 4.2.0'
+  s.add_dependency 'rails', '>= 3.2.0'
   s.add_dependency 'hutch', '< 1.0.0'
   s.add_dependency 'select2-rails', '>= 4.0.0'
 end
