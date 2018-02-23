@@ -44,18 +44,11 @@ module CommonTags
       render json: @tags.map(&:to_suggest)
     end
 
-    def related_suggestions
-      @tag = Tag.find params[:tag_id]
-      @tags = Tag.where.not(id: @tag.id).where 'name ILIKE ?', "%#{params[:q]}%"
-      render json: @tags.map(&:to_suggest)
-    end
-
     private
       def tag_params
         params.require(:tag).permit :name,
                                     :specialization,
-                                    :permalink,
-                                    connected_tag_ids: []
+                                    :permalink
       end
 
       def set_tag

@@ -13,11 +13,6 @@
           <td>
             <span class="label label-info"><%= tag.name %></span>
           </td>
-          <td>
-            <%= tag.connected_tags.map do |tag|
-                "<span class='connected_tag'>#{tag.name}</span>"
-            end.join(',').html_safe %>
-          </td>
           <td><%= link_to 'Edit', edit_tag_path(tag),
                           class: 'btn btn-default btn-xs' %></td>
           <td><%= link_to 'Destroy', tag, method: :delete,

@@ -7,7 +7,6 @@ CommonTags::Engine.routes.draw do
 
   resources :tags, only: tags_resources_actions do
     get 'suggestions', on: :collection
-    get 'related_suggestions'
   end
 
   resources :taggings, only: [] do

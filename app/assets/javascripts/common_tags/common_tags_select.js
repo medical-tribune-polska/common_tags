@@ -43,21 +43,20 @@
     });
 
     return this;
-  }
+  };
 
   function formatSelection(tag) {
     $element = $(tag.element);
-    return format($element.data('specialization'), tag.text, $element.data('count'));
+    return format($element.data('specialization'), tag.text);
   };
 
   function formatResult(tag) {
-    return format(tag.specialization, tag.text, tag.count);
+    return format(tag.specialization, tag.text);
   };
 
   function format(specialization, text, count) {
     var specialization_text = specialization ? '<span class="glyphicon glyphicon-tags"></span> ' : ''
-    var count_text = count ? ' (' + count + ')' : ''
-    return $('<span>' + specialization_text + text + count_text + '</span>');
+    return $('<span>' + specialization_text + text + '</span>');
   }
 
 })(jQuery);

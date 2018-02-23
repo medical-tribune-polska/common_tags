@@ -11,7 +11,6 @@ namespace :common_tags do
                                     name,
                                     specialization,
                                     permalink,
-                                    tag_connections_count,
                                     created_at,
                                     updated_at)
       SELECT *
@@ -21,7 +20,6 @@ namespace :common_tags do
                 ct.name,
                 ct.specialization,
                 ct.permalink,
-                ct.tag_connections_count,
                 ct.created_at,
                 ct.updated_at
          FROM common_tags_tags ct')
@@ -29,18 +27,8 @@ namespace :common_tags do
             name text,
             specialization boolean,
             permalink text,
-            tag_connections_count integer,
             created_at timestamp,
             updated_at timestamp);
-
-      INSERT INTO common_tags_tag_connections (tag_id, connected_tag_id)
-      SELECT *
-      FROM dblink(
-        'dbname=#{CommonTags.master_db_name}',
-        'SELECT DISTINCT ON (tag_id, connected_tag_id) ctc.tag_id,
-                                                       ctc.connected_tag_id
-         FROM common_tags_tag_connections ctc')
-      AS t1(tag_id uuid, connected_tag_id uuid);
     SQL
   end
 end

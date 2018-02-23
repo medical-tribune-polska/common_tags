@@ -35,7 +35,6 @@ module CommonTags
       end
 
       def create_tag
-        create_tags_if_missing *message[:attributes][:connected_tag_ids]
         CommonTags::Tag.create message[:attributes]
       end
 
