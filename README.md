@@ -16,15 +16,15 @@ include CommonTags::Taggable
 ### View Helpers
 Render tags as string:
 ```ruby
-render_tags_for(@taggable)
+render_tags_for(@taggable, 'podyplomie')
 ```
 Render tags as form:
 ```ruby
-render_modifyable_tags_for(@taggable)
+render_modifyable_tags_for(@taggable, 'podyplomie')
 ```
 Form helper:
 ```ruby
-f.tags_field
+f.tags_field :tag_ids, 'podyplomie'
 ```
 
 ## Installation

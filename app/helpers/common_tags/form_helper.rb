@@ -7,14 +7,17 @@ module CommonTags
     end
 
     module CommonTagHelper
-      def tags_field(method = :tag_ids)
+      def tags_field(method = :tag_ids, list_permalink = 'podyplomie')
+        list_permalink = 'podyplomie' unless list_permalink.present?
+        list = List.find_by permalink: list_permalink
+
         html_options = {
           multiple: true,
           class: 'form-control',
           id: "#{@object_name}_#{method}",
           data: {
             toggle: 'common_tags_select',
-            suggestions: @template.common_tags.suggestions_tags_path,
+            suggestions: @template.common_tags.suggestions_list_tags_path(list),
           }
         }
         @template.select_tag "#{@object_name}[#{method}]",

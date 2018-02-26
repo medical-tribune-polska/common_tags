@@ -6,8 +6,9 @@ module CommonTags
         .html_safe
     end
 
-    def render_modifyable_tags_for(taggable)
-      render 'common_tags/taggable_form', taggable: taggable
+    def render_modifyable_tags_for(taggable, list_permalink = 'podyplomie')
+      list = List.find_by permalink: list_permalink
+      render 'common_tags/taggable_form', taggable: taggable, list: list
     end
 
     private

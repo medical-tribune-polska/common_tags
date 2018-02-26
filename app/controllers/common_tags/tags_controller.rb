@@ -1,8 +1,10 @@
 module CommonTags
   class TagsController < ApplicationController
+    before_action :set_list
     before_action :set_tag, only: [:edit, :update, :destroy]
+
     def index
-      @tags = Tag.order('name').all
+      @tags = @list.tags.order('name').all
     end
 
     def edit
@@ -18,11 +20,11 @@ module CommonTags
     end
 
     def new
-      @tag = Tag.new
+      @tag = @list.tags.build
     end
 
     def create
-      @tag = Tag.new tag_params
+      @tag = @list.tags.build tag_params
 
       if @tag.save
         @tag.publish_create
@@ -40,7 +42,7 @@ module CommonTags
     end
 
     def suggestions
-      @tags = Tag.where 'name ILIKE ?', "%#{params[:q]}%"
+      @tags = @list.tags.where 'name ILIKE ?', "%#{params[:q]}%"
       render json: @tags.map(&:to_suggest)
     end
 
@@ -51,8 +53,12 @@ module CommonTags
                                     :permalink
       end
 
+      def set_list
+        @list = List.find_by permalink: params[:list_permalink]
+      end
+
       def set_tag
-        @tag = Tag.find params[:id]
+        @tag = @list.tags.find params[:id]
       end
   end
 end
