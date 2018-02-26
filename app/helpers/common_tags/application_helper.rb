@@ -6,8 +6,9 @@ module CommonTags
         .html_safe
     end
 
-    def render_modifyable_tags_for(taggable, list_permalink = 'podyplomie')
+    def render_modifyable_tags_for(taggable, list_permalink = nil)
       list = List.find_by permalink: list_permalink
+      return "Tag list [#{list_permalink || 'nil'}] not found" unless list
       render 'common_tags/taggable_form', taggable: taggable, list: list
     end
 

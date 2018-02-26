@@ -7,9 +7,10 @@ module CommonTags
     end
 
     module CommonTagHelper
-      def tags_field(method = :tag_ids, list_permalink = 'podyplomie')
-        list_permalink = 'podyplomie' unless list_permalink.present?
+      def tags_field(method = :tag_ids, list_permalink = nil)
         list = List.find_by permalink: list_permalink
+
+        return "Tag list [#{list_permalink || 'nil'}] not found" unless list
 
         html_options = {
           multiple: true,

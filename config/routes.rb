@@ -5,8 +5,6 @@ CommonTags::Engine.routes.draw do
     []
   end
 
-  get 'tags/suggestions', to: 'tags#suggestions', list_permalink: 'podyplomie'
-
   resources :list, only: tags_resources_actions, param: :permalink do
     resources :tags, only: tags_resources_actions do
       get 'suggestions', on: :collection
