@@ -54,7 +54,7 @@ module CommonTags
       end
 
       def set_list
-        @list = List.find_by permalink: params[:list_permalink]
+        @list = List.find_by_permalink params[:list_permalink]
       end
 
       def set_tag

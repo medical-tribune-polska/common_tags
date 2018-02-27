@@ -8,7 +8,7 @@ module CommonTags
 
     module CommonTagHelper
       def tags_field(method = :tag_ids, list_permalink = nil)
-        list = List.find_by permalink: list_permalink
+        list = List.find_by_permalink list_permalink
 
         return "Tag list [#{list_permalink || 'nil'}] not found" unless list
 
