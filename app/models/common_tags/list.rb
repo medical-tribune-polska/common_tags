@@ -11,5 +11,9 @@ module CommonTags
     def to_param
       permalink
     end
+
+    def self.name_and_permalink_uniqueness_scope
+      []
+    end
   end
 end

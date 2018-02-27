@@ -6,7 +6,8 @@ class CreateCommonTagsLists < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_reference :common_tags_tags, :list
+    add_column :common_tags_tags, :list_id, :integer
+    add_index :common_tags_tags, :list_id
 
     podyplomie_list = CommonTags::List.create name: 'podyplomie'
     CommonTags::List.create name: 'magwet'
@@ -14,7 +15,8 @@ class CreateCommonTagsLists < ActiveRecord::Migration
   end
 
   def down
-    remove_reference :common_tags_tags, :list
+    remove_index :common_tags_tags, :list_id
+    remove_column :common_tags_tags, :list_id
     drop_table :common_tags_lists
   end
 end
