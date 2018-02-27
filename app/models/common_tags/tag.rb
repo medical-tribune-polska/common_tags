@@ -2,6 +2,10 @@ module CommonTags
   class Tag < ActiveRecord::Base
     include HasNameAndPermalink
 
+    if Rails::VERSION::STRING.to_i <= 3
+      attr_accessible :name, :specialization, :permalink, :list_id
+    end
+
     has_many :taggings, dependent: :destroy
     belongs_to :list
 
