@@ -3,7 +3,7 @@ module CommonTags
     include HasNameAndPermalink
 
     validates :name, uniqueness: { case_sensitive: false, scope: 'list_id' }
-      validates :permalink, uniqueness: { scope: 'list_id' }
+    validates :permalink, uniqueness: { scope: 'list_id' }
 
     if Rails::VERSION::STRING.to_i <= 3
       attr_accessible :name, :specialization, :permalink, :list_id

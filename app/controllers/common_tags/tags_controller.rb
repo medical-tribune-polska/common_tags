@@ -54,7 +54,13 @@ module CommonTags
       end
 
       def set_list
-        @list = List.find_by_permalink params[:list_permalink]
+        permalink = if Rails::VERSION::STRING.to_i <= 3
+                      params[:list_permalink]
+                    else
+                      params[:list_id]
+                    end
+
+        @list = List.find_by_permalink permalink
       end
 
       def set_tag
