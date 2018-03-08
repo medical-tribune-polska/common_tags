@@ -39,12 +39,12 @@ module CommonTags
       end
 
       def destroy_tag
-        CommonTags::Tag.find(message[:id]).destroy
+        CommonTags::Tag.find(message[:attributes][:id]).destroy
       end
 
       def update_tag
-        create_tags_if_missing message[:id]
-        CommonTags::Tag.find(message[:id]).update message[:attributes]
+        create_tags_if_missing message[:attributes][:id]
+        CommonTags::Tag.find(message[:attributes][:id]).update message[:attributes]
       end
 
       def message_accessible?
@@ -54,6 +54,7 @@ module CommonTags
       def create_tags_if_missing(*tag_ids)
         found_tag_ids = CommonTags::Tag.where('id IN (?)', tag_ids).pluck(:id)
         missing_tag_ids = tag_ids - found_tag_ids
+        return if missing_tag_ids.empty?
         missing_tag_ids.each { |id| create_missing_tag id }
       end
 

@@ -6,6 +6,8 @@ namespace :common_tags do
       next
     end
 
+    ids = CommonTags::Tag.pluck :id;
+
     ActiveRecord::Base.connection.execute <<-SQL
       INSERT INTO common_tags_tags (id,
                                     name,
@@ -28,7 +30,8 @@ namespace :common_tags do
             specialization boolean,
             permalink text,
             created_at timestamp,
-            updated_at timestamp);
+            updated_at timestamp)
+      WHERE NOT id = ANY(ARRAY['#{ids.join("'::uuid, '")}']);
     SQL
   end
 end

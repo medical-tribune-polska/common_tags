@@ -19,7 +19,7 @@ module CommonTags
     end
 
     def publish_update(changed_attributes)
-      Publisher.publish action: 'update', attributes: changed_attributes, id: id
+      Publisher.publish action: 'update', attributes: as_json
     end
 
     def publish_destroy
