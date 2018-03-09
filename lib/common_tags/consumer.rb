@@ -44,7 +44,7 @@ module CommonTags
 
       def update_tag
         create_tags_if_missing message[:attributes][:id]
-        CommonTags::Tag.find(message[:attributes][:id]).update message[:attributes]
+        CommonTags::Tag.find(message[:attributes][:id]).update_attributes message[:attributes]
       end
 
       def message_accessible?
