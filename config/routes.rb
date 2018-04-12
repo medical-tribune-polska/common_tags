@@ -12,11 +12,7 @@ CommonTags::Engine.routes.draw do
   end
 
   resources :taggings, only: [] do
-    if Rails::VERSION::STRING.to_i <= 3
-      put :set, on: :collection
-    else
-      patch :set, on: :collection
-    end
+    patch :set, on: :collection
   end
 
   namespace :api do

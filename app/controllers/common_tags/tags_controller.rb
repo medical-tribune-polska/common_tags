@@ -1,12 +1,5 @@
 module CommonTags
   class TagsController < ApplicationController
-    class << self
-      if Rails::VERSION::STRING.to_i <= 3
-        alias_method :before_action, :before_filter
-        alias_method :after_action, :after_filter
-      end
-    end
-
     before_action :set_list
     before_action :set_tag, only: [:edit, :update, :destroy]
 
@@ -61,13 +54,7 @@ module CommonTags
       end
 
       def set_list
-        permalink = if Rails::VERSION::STRING.to_i <= 3
-                      params[:list_id]
-                    else
-                      params[:list_permalink]
-                    end
-
-        @list = List.find_by_permalink permalink
+        @list = List.find_by_permalink params[:list_permalink]
       end
 
       def set_tag
