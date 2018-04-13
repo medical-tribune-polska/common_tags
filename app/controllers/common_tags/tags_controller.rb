@@ -55,7 +55,7 @@ module CommonTags
       end
 
       def set_site_group
-        @site_group = SiteGroup.find_by_permalink params[:site_group_permalink]
+        @site_group = CommonTags::SiteGroup.find_by_permalink params[:site_group_permalink]
       end
 
       def set_tag

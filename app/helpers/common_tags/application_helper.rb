@@ -7,7 +7,7 @@ module CommonTags
     end
 
     def render_modifyable_tags_for(taggable, site_group_permalink = nil)
-      site_group = SiteGroup.find_by permalink: site_group_permalink
+      site_group = CommonTags::SiteGroup.find_by permalink: site_group_permalink
       return "Common Tags site group [#{site_group_permalink || 'nil'}] not found" unless site_group
       render 'common_tags/taggable_form', taggable: taggable, site_group: site_group
     end
