@@ -1,0 +1,8 @@
+<div class="h1"></div>
+<ul class="nav nav-tabs">
+  <% CommonTags::SiteGroup.all.each do |site_group| %>
+    <li class="<%= 'active' if site_group.id == @site_group.id %>">
+      <%= link_to site_group.name, site_group_tags_path(site_group) %>
+    </li>
+  <% end %>
+</ul>

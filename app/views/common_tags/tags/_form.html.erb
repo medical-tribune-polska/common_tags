@@ -1,4 +1,4 @@
-<%= form_for [@list, @tag] do |f| %>
+<%= form_for [@site_group, @tag] do |f| %>
 
 <div class="row">
   <div class="col-sm-8">
@@ -23,6 +23,11 @@
     <div class="form-group">
       <%= f.label :permalink %>
       <%= f.text_field :permalink, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :lists %>
+      <%= f.collection_select :list_ids, @site_group.lists, :id, :name, {}, multiple: true, class: 'form-control', data: { toggle: 'common_tags_list_select'} %>
     </div>
 
     <div class="checkbox">

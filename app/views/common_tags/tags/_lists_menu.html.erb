@@ -1,8 +1,0 @@
-<div class="h1"></div>
-<ul class="nav nav-tabs">
-  <% CommonTags::List.all.each do |list| %>
-    <li class="<%= 'active' if list.id == @list.id %>">
-      <%= link_to list.name, list_tags_path(list) %>
-    </li>
-  <% end %>
-</ul>

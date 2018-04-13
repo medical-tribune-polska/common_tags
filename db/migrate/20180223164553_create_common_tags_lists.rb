@@ -9,9 +9,13 @@ class CreateCommonTagsLists < ActiveRecord::Migration
     add_column :common_tags_tags, :list_id, :integer
     add_index :common_tags_tags, :list_id
 
-    podyplomie_list = CommonTags::List.create name: 'podyplomie'
-    CommonTags::List.create name: 'magwet'
-    CommonTags::Tag.update_all list_id: podyplomie_list.id
+    execute <<-SQL
+      INSERT INTO common_tags_lists (name) VALUES ('podyplomie'), ('magwet');
+      UPDATE common_tags_tags
+      SET list_id = common_tags_lists.id
+      FROM common_tags_lists
+      WHERE common_tags_lists.name = 'podyplomie';
+    SQL
   end
 
   def down

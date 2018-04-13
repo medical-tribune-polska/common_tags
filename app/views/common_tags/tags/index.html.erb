@@ -1,16 +1,26 @@
 <div class="row">
   <div class="col-sm-12">
-    <%= render 'lists_menu' %>
+    <%= render 'site_groups_menu' %>
   </div>
 </div>
 
 <div class="row">
   <div class="col-sm-8">
     <h1>Tagi</h1>
+    <p><%= link_to '< back to list', site_group_tags_path(@site_group) %></p>
 
-    <p><%= link_to 'New Tag', new_list_tag_path(@list), class: 'btn btn-default' %></p>
+    <p><%= link_to 'New Tag', new_site_group_tag_path(@site_group), class: 'btn btn-default' %></p>
 
     <table class="table tags-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Lists</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
       <% @tags.each do |tag| %>
         <tr>
           <td>
@@ -21,15 +31,16 @@
           <td>
             <span class="label label-info"><%= tag.name %></span>
           </td>
-          <td><%= link_to 'Edit', edit_list_tag_path(@list, tag),
+          <td class="small"><%= tag.lists.map(&:name).join(', ') %></td>
+          <td><%= link_to 'Edit', edit_site_group_tag_path(@site_group, tag),
                           class: 'btn btn-default btn-xs' %></td>
-          <td><%= link_to 'Destroy', list_tag_path(@list, tag), method: :delete,
+          <td><%= link_to 'Destroy', site_group_tag_path(@site_group, tag), method: :delete,
                           class: 'btn btn-danger btn-xs',
                           data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </table>
 
-    <p><%= link_to 'New Tag', new_list_tag_path(list: @list), class: 'btn btn-default' %></p>
+    <p><%= link_to 'New Tag', new_site_group_tag_path(site_group: @site_group), class: 'btn btn-default' %></p>
   </div>
 </div>

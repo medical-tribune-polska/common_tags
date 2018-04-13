@@ -1,10 +1,10 @@
 module CommonTags
   class TagsController < ApplicationController
-    before_action :set_list
+    before_action :set_site_group
     before_action :set_tag, only: [:edit, :update, :destroy]
 
     def index
-      @tags = @list.tags.order('name').all
+      @tags = @site_group.tags.order('name').all
     end
 
     def edit
@@ -13,18 +13,18 @@ module CommonTags
     def update
       if @tag.update tag_params
         @tag.publish_update tag_params
-        redirect_to action: 'index'
+        redirect_to action: 'edit'
       else
         render 'edit'
       end
     end
 
     def new
-      @tag = @list.tags.build
+      @tag = @site_group.tags.build
     end
 
     def create
-      @tag = @list.tags.build tag_params
+      @tag = @site_group.tags.build tag_params
 
       if @tag.save
         @tag.publish_create
@@ -42,7 +42,7 @@ module CommonTags
     end
 
     def suggestions
-      @tags = @list.tags.where 'name ILIKE ?', "%#{params[:q]}%"
+      @tags = @site_group.tags.where 'name ILIKE ?', "%#{params[:q]}%"
       render json: @tags.map(&:to_suggest)
     end
 
@@ -50,15 +50,16 @@ module CommonTags
       def tag_params
         params.require(:tag).permit :name,
                                     :specialization,
-                                    :permalink
+                                    :permalink,
+                                    list_ids: []
       end
 
-      def set_list
-        @list = List.find_by_permalink params[:list_permalink]
+      def set_site_group
+        @site_group = SiteGroup.find_by_permalink params[:site_group_permalink]
       end
 
       def set_tag
-        @tag = @list.tags.find params[:id]
+        @tag = @site_group.tags.find params[:id]
       end
   end
 end

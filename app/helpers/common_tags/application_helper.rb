@@ -6,10 +6,10 @@ module CommonTags
         .html_safe
     end
 
-    def render_modifyable_tags_for(taggable, list_permalink = nil)
-      list = List.find_by_permalink list_permalink
-      return "Tag list [#{list_permalink || 'nil'}] not found" unless list
-      render 'common_tags/taggable_form', taggable: taggable, list: list
+    def render_modifyable_tags_for(taggable, site_group_permalink = nil)
+      site_group = SiteGroup.find_by permalink: site_group_permalink
+      return "Common Tags site group [#{site_group_permalink || 'nil'}] not found" unless site_group
+      render 'common_tags/taggable_form', taggable: taggable, site_group: site_group
     end
 
     private

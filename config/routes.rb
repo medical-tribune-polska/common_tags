@@ -5,7 +5,7 @@ CommonTags::Engine.routes.draw do
     []
   end
 
-  resources :list, only: tags_resources_actions, param: :permalink do
+  resources :site_group, only: tags_resources_actions, param: :permalink do
     resources :tags, only: tags_resources_actions do
       get 'suggestions', on: :collection
     end

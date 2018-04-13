@@ -16,4 +16,5 @@
 
 $(document).on('ready page:change', function(){
   $('[data-toggle=common_tags_select]').common_tags_select();
+  $('[data-toggle=common_tags_list_select]').select2();
 });
