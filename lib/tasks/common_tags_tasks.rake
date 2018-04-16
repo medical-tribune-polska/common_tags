@@ -32,7 +32,7 @@ namespace :common_tags do
             permalink text,
             created_at timestamp,
             updated_at timestamp)
-      WHERE NOT id = ANY(ARRAY[#{site_group_ids.join(", ")}]);
+      WHERE NOT id = ANY(ARRAY[#{site_group_ids.join(", ")}]::integer[]);
 
       INSERT INTO common_tags_lists (id,
                                      name,
@@ -56,7 +56,7 @@ namespace :common_tags do
             site_group_id integer,
             created_at timestamp,
             updated_at timestamp)
-      WHERE NOT id = ANY(ARRAY[#{list_ids.join(", ")}]);
+      WHERE NOT id = ANY(ARRAY[#{list_ids.join(", ")}]::integer[]);
 
       INSERT INTO common_tags_tags (id,
                                     name,
@@ -83,7 +83,7 @@ namespace :common_tags do
             permalink text,
             created_at timestamp,
             updated_at timestamp)
-      WHERE NOT id = ANY(ARRAY['#{tag_ids.join("'::uuid, '")}']);
+      WHERE NOT id = ANY(ARRAY[#{tag_ids.map{ |id| "'#{id}'" }.join("'::uuid, '")}]::uuid[]);
 
       INSERT INTO common_tags_lists_tags (tag_id, list_id)
       SELECT *
