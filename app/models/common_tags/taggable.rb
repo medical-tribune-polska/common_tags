@@ -11,7 +11,7 @@ module CommonTags
 
       scope :with_tags, lambda { |tag_ids|
         joins(:taggings)
-          .where 'common_tags_taggings.tag_id IN (?)', tag_ids.map(&:to_i)
+          .where 'common_tags_taggings.tag_id IN (?)', tag_ids
       }
     end
   end
