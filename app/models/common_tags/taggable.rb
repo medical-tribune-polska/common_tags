@@ -10,8 +10,15 @@ module CommonTags
                dependent: :destroy
 
       scope :with_tags, lambda { |tag_ids|
-        joins(:taggings)
-          .where 'common_tags_taggings.tag_id IN (?)', tag_ids
+        joins <<-SQL
+          INNER JOIN (
+            SELECT DISTINCT(taggable_id)
+            FROM common_tags_taggings
+            WHERE common_tags_taggings.taggable_type = '#{name}'
+            AND common_tags_taggings.tag_id IN ('#{tag_ids.join("','")}')
+          ) selected_taggings
+          ON #{table_name}.id = selected_taggings.taggable_id
+        SQL
       }
     end
   end
