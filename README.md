@@ -94,3 +94,8 @@ rename association
 
 migrate old tags:
 'migrate_old_tags.rb.example'
+
+## Upgrading
+
+### To version 2.0
+Changed `with_tags` scope to `with_any_tag`
