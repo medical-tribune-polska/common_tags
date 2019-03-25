@@ -4,7 +4,7 @@ module CommonTags
     before_action :set_tag, only: [:edit, :update, :destroy]
 
     def index
-      @tags = @site_group.tags.order('name').all
+      @tags = @site_group.tags.includes(:lists).order('name').all
     end
 
     def edit
